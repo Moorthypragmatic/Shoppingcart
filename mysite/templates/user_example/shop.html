@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="US-en">
+<!-- Head -->
+
+<head>
+	<title>Shop</title>
+
+	{% load staticfiles %}
+	<!-- Meta-Tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="Shopping Cart a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+	<link href="{% static 'toastr\build\toastr.css' %}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{% static 'CSS/font-awesome.css' %}" type="text/css" media="all">
+	<script src="{% static 'toastr\toastr.js' %}"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<style>
+	     #header
+        {
+            width:100%;
+            height:250px;
+             background-color:white;
+             display:flex;
+             margin-bottom:-40px;
+        }
+        #logo
+        {
+            width:30%;
+            height:80px;
+            padding:20px;
+        }
+        a:hover
+	    {
+		    cursor:pointer;
+		    color:#F25330;
+    	}
+        a
+        {
+            color:black;
+
+        }
+        .modal
+	    {
+            display: none;
+            position: fixed;
+            z-index: 15000;
+            padding-top: 5%;
+            left: 0;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+
+        }
+        .modal-content
+        {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0px 0px;border-radius:5px;
+            border: 1px solid #888;
+            width: 90%;
+            height: 97%;
+            overflow-y: hidden;
+            overflow-x: hidden;
+
+        }
+
+
+	</style>
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+
+	</script>
+	<script>
+
+	    function run()
+	    {
+	         var x = document.getElementById("myOption").value;
+
+            if(x == 1)
+            {
+
+                //product image-1
+                document.getElementById('pd1').innerHTML="&#2352;"+"&nbsp;"+"4452.90";
+                document.getElementById('pd11').innerHTML="&#2352;"+"8534.73";
+
+                //product image-2
+                document.getElementById('pd2').innerHTML="&#2352;"+"&nbsp;"+"7050.43";
+                document.getElementById('pd22').innerHTML="&#2352;"+"14471.93";
+
+
+                //product image-3
+                document.getElementById('pd3').innerHTML="&#2352;"+"&nbsp;"+"2968.60";
+                document.getElementById('pd33').innerHTML="&#2352;"+"7050.43";
+
+                //product image-4
+                document.getElementById('pd4').innerHTML="&#2352;"+"&nbsp;"+"7050.43";
+                document.getElementById('pd44').innerHTML="&#2352;"+"14471.93";
+
+                //product image-5
+                document.getElementById('pd5').innerHTML="&#2352;"+"&nbsp;"+"1484.30";
+                document.getElementById('pd55').innerHTML="&#2352;"+"3339.68";
+
+                //product image-6
+                document.getElementById('pd6').innerHTML="&#2352;"+"&nbsp;"+"3710.75";
+                document.getElementById('pd66').innerHTML="&#2352;"+"7050.43";
+
+                //product image-7
+                document.getElementById('pd7').innerHTML="&#2352;"+"&nbsp;"+"1855.38";
+                document.getElementById('pd77').innerHTML="&#2352;"+"4823.98";
+
+                //product image-8
+                document.getElementById('pd8').innerHTML="&#2352;"+"&nbsp;"+"2671.74";
+                document.getElementById('pd88').innerHTML="&#2352;"+"6234.06";
+
+
+
+             }
+             else if(x ==2)
+             {
+                  //product image-1
+                document.getElementById('pd1').innerHTML="&euro;"+"&nbsp;"+"52.16";
+                document.getElementById('pd11').innerHTML="&euro;"+"99.47";
+
+                //product image-2
+                document.getElementById('pd2').innerHTML="&euro;"+"&nbsp;"+"82.58";
+                document.getElementById('pd22').innerHTML="&euro;"+"169.51";
+
+                //product image-3
+                document.getElementById('pd3').innerHTML="&euro;"+"&nbsp;"+"34.77";
+                document.getElementById('pd33').innerHTML="&euro;"+"82.58";
+
+                //product image-4
+                document.getElementById('pd4').innerHTML="&euro;"+"&nbsp;"+"82.58";
+                document.getElementById('pd44').innerHTML="&euro;"+"169.51";
+
+                //product image-5
+                document.getElementById('pd5').innerHTML="&euro;"+"&nbsp;"+"17.39";
+                document.getElementById('pd55').innerHTML="&euro;"+"39.12";
+
+                //product image-6
+                document.getElementById('pd6').innerHTML="&euro;"+"&nbsp;"+"43.47";
+                document.getElementById('pd66').innerHTML="&euro;"+"82.58";
+
+                //product image-7
+                document.getElementById('pd7').innerHTML="&euro;"+"&nbsp;"+"21.73";
+                document.getElementById('pd77').innerHTML="&euro;"+"56.50";
+
+                //product image-2
+                document.getElementById('pd8').innerHTML="&euro;"+"&nbsp;"+"31.29";
+                document.getElementById('pd88').innerHTML="&euro;"+"73.02";
+
+             }
+             else
+             {
+
+             }
+
+	    }
+	    function myfun(idv)
+	    {
+	        //alert(idv);
+	        window.localStorage.setItem("item",idv);
+
+	        if(idv == 'item1')
+	        {
+	            var itemprice = document.getElementById('pd1').innerHTML;
+
+	            var itemprice1 = document.getElementById('pd11').innerHTML;
+
+	            var name=document.getElementById('p1').innerHTML;
+
+                //alert(name);
+	            window.localStorage.setItem("price",itemprice);
+	            window.localStorage.setItem("price1",itemprice1);
+	            window.localStorage.setItem("name",name);
+	        }
+            else if(idv == 'item2')
+	        {
+	            var itemprice = document.getElementById('pd2').innerHTML;
+	            window.localStorage.setItem("price",itemprice);
+
+	            var itemprice1 = document.getElementById('pd22').innerHTML;
+	            window.localStorage.setItem("price1",itemprice1);
+
+	            var name=document.getElementById('p2').innerHTML;
+	             window.localStorage.setItem("name",name);
+	        }
+            else if(idv == 'item3')
+	        {
+	            var itemprice = document.getElementById('pd3').innerHTML;
+	            window.localStorage.setItem("price",itemprice);
+
+	            var itemprice1 = document.getElementById('pd33').innerHTML;
+	            window.localStorage.setItem("price1",itemprice1);
+
+	             var name=document.getElementById('p3').innerHTML;
+	             window.localStorage.setItem("name",name);
+	        }
+	        else if(idv == 'item4')
+	        {
+	            var itemprice = document.getElementById('pd4').innerHTML;
+	            window.localStorage.setItem("price",itemprice)
+
+	            var itemprice1 = document.getElementById('pd44').innerHTML;
+	            window.localStorage.setItem("price1",itemprice1);
+
+	             var name=document.getElementById('p4').innerHTML;
+	             window.localStorage.setItem("name",name);
+	        }
+	        else if(idv == 'item5')
+	        {
+	            var itemprice = document.getElementById('pd5').innerHTML;
+	            window.localStorage.setItem("price",itemprice)
+
+	            var itemprice1 = document.getElementById('pd55').innerHTML;
+	            window.localStorage.setItem("price1",itemprice1);
+
+	             var name=document.getElementById('p5').innerHTML;
+	             window.localStorage.setItem("name",name);
+	        }
+	        else if(idv == 'item6')
+	        {
+	            var itemprice = document.getElementById('pd6').innerHTML;
+	            window.localStorage.setItem("price",itemprice)
+
+	            var itemprice1 = document.getElementById('pd66').innerHTML;
+	            window.localStorage.setItem("price1",itemprice1);
+
+	             var name=document.getElementById('p6').innerHTML;
+	             window.localStorage.setItem("name",name);
+	        }
+	        else if(idv == 'item7')
+	        {
+	            var itemprice = document.getElementById('pd7').innerHTML;
+	            window.localStorage.setItem("price",itemprice)
+
+	            var itemprice1 = document.getElementById('pd77').innerHTML;
+	            window.localStorage.setItem("price1",itemprice1);
+
+	             var name=document.getElementById('p7').innerHTML;
+	             window.localStorage.setItem("name",name);
+	        }
+	        else
+	        {
+	            var itemprice = document.getElementById('pd8').innerHTML;
+	            window.localStorage.setItem("price",itemprice)
+
+	            var itemprice1 = document.getElementById('pd88').innerHTML;
+	            window.localStorage.setItem("price1",itemprice1);
+
+	             var name=document.getElementById('p8').innerHTML;
+	             window.localStorage.setItem("name",name);
+	        }
+
+	    }
+
+	</script>
+	<style>
+	    ul.breadcrumb
+	    {
+            padding: 10px 16px;
+            list-style: none;
+            background-color: #eee;
+            width:77.2%;
+            margin:0px auto;
+        }
+
+        /* Display list items side by side */
+        ul.breadcrumb li
+        {
+            display: inline;
+            font-size: 18px;
+        }
+
+        /* Add a slash symbol (/) before/behind each list item */
+        ul.breadcrumb li+li:before
+        {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
+        }
+
+        /* Add a color to all links inside the list */
+        ul.breadcrumb li a
+        {
+            color: #0275d8;
+            text-decoration: none;
+        }
+
+        /* Add a color on mouse-over */
+        ul.breadcrumb li a:hover
+        {
+            color: #01447e;
+            text-decoration: underline;
+        }
+        img:hover
+        {
+            cursor:pointer;
+        }
+
+	</style>
+
+	<!-- //Meta-Tags -->
+	<!-- Index-Page-CSS -->
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'style\style.css' %}"/>
+	<!-- //Custom-Stylesheet-Links -->
+	<!--fonts -->
+	<link href="//fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<!-- //fonts -->
+
+	<!-- Font-Awesome-File-Links -->
+	<!-- CSS -->
+	{% load staticfiles %}
+	<style>
+	    .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-top: 15px;
+}
+
+.alert.success {background-color: #4CAF50;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800;}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+	</style>
+
+	<script >
+
+        var itemCount=window.localStorage.getItem('itemtotal');
+        var itemset = window.localStorage.getItem("carttable");
+
+        if(itemset == null)
+        {
+            itemset="";
+        }
+        else
+        {
+            var itemset = window.localStorage.getItem("carttable");
+
+        }
+        document.getElementById("itemcount").innerHTML = itemCount;
+        //document.getElementById("itemcount1").innerHTML = itemCount1;
+        //
+        //alert(itemset);
+        //var itemset="";
+        function ss(idv)
+        {
+
+
+
+            itemCount++;
+
+            //alert(itemCount);
+            window.localStorage.setItem('itemtotal',itemCount);
+            document.getElementById("itemcount").innerHTML = itemCount;
+            //document.getElementById("itemcount1").innerHTML = itemCount;
+
+            const itemimg = document.getElementsByClassName("" + idv)[0].src;
+            const itemname = document.getElementsByClassName("" + idv)[1].innerHTML;
+            const itemprice = document.getElementsByClassName("" + idv)[2].innerHTML;
+
+            var totalid = "totval" + itemCount;
+            var itemprice1 = itemprice.split("$")[1];
+
+            itemset += '<tr class="productitm">';
+            itemset += '<td><img src="' +itemimg+ '" class="thumb"></td>';
+            itemset += '<td>'+itemname+'</td>';
+            itemset += '<td><input type="number" value="1" min="1" max="99" onclick="qtytotal(this,'+totalid+','+itemprice1+');" class="qtyinput"></td>';
+            itemset += '<td>'+itemprice1+'</td>';
+            itemset += '<td><span id="'+totalid+'">'+itemprice1+'</span></td>';
+            itemset += '<td><span class="remove" onclick="remove(this,'+itemCount+');"><img src="{% static 'images\trash.png' %}" alt="X" /></span></td></tr>';
+
+            window.localStorage.setItem("carttable",itemset);
+
+             try {
+                    info();
+            }
+            catch (e) {
+                alert(e);
+            }
+
+            //alert(itemset);
+        }
+
+        function info()
+        {
+
+            //alert('worked');
+            document.getElementById('msg').style.display="block";
+
+            setTimeout(function()
+            {
+                document.getElementById('msg').style.display="none";
+            }, 1000);
+
+        }
+        function myf()
+        {
+             var itemCount=window.localStorage.getItem('itemtotal');
+
+             var item=document.getElementById("itemcount").innerHTML = itemCount;           
+
+
+        }
+    </script>
+
+</head>
+
+<body onload="myf()">
+
+        {% if user.is_authenticated %}                     
+
+                  <div class="links" style="display:flex;float:right;margin-right:170px;margin-top:30px;font-family:'Times New Roman', Times, serif;font-size:20px;">
+                         <a  style="color:black;text-decoration:none;" id="link1" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" onclick="document.getElementById('popupno').style.display='none'">Hi, {{user.username}} </a>  |  <a style="color:black;text-decoration:none" id="link2" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'logout' %}?next={{ request.path | urlencode }}" >Log out</a>  |  <a style="color:black;text-decoration:none" id="link3" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'cartdetails' %}" >Cart (<span  id="itemcount"  >0</span>) </a>
+                  </div>                       
+
+         {% else %}                      
+
+                 <div class="links" id="linkid1" style="display:flex;float:right;margin-right:170px;margin-top:30px;font-family:'Times New Roman', Times, serif;font-size:20px;">
+                         <a  style="color:black;text-decoration:none;" id="link1" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" onclick="document.getElementById('popupno').style.display='block'">Login</a>  |  <a style="color:black;text-decoration:none" id="link2" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'register' %}" >Register</a>  |  <a style="color:black;text-decoration:none" id="link3" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'cartdetails' %}" >Cart (<span  id="itemcount"  >0</span>) </a>
+                  </div>
+
+        {% endif %}
+
+    <div id="header">
+
+
+            <div id="logo" style="width:50%">
+                <a href=""><img style="width:60%" src="{% static 'images\logotop.png' %}" alt="" /></a>
+            </div>
+
+                <div>
+                <input type="text" id="search" placeholder="Search products,Categories,Tags" style="margin-left:100px;margin-top:50px;height:25px;border:3px solid black;width:250px" />
+                <button style="width:33px;height:33px;padding-bottom:10px;margin-left:-5px;background-repeat:no-repeat;border:3px solid black;border-left: none;border-radius:3px;background-image:url({% static 'images/search.png' %})"></button>
+
+                <div class="links" id="linkid" style="display:none;float:right;margin-right:170px;margin-top:30px;font-family:'Times New Roman', Times, serif;font-size:20px;">
+                    <a  style="color:black;text-decoration:none;" id="link1" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" onclick="document.getElementById('popupno').style.display='block'">Login</a>  |  <a style="color:black;text-decoration:none" id="link2" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'register' %}" >Register</a>  |  <a style="color:black;text-decoration:none" id="link3" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="" >Cart (<span  id="itemcount"  >0</span>) </a>
+                </div>
+
+                <br>
+                <a href="https://twitter.com/login?lang=en" id="bottle" ><img  id="tw" style="float:left;margin-left:615px;width:5%;margin-top:0px;" src="{% static 'images\tw.png' %}" alt="" /></a>
+                <a href="https://www.facebook.com/"><img style="float:left;margin-left:15px;width:5%;margin-top:0px;" src="{% static 'images\fb.png' %}" alt="" /></a>
+                <a href="https://in.pinterest.com/"><img style="float:left;margin-left:15px;width:5%;margin-top:0px;" src="{% static 'images\pinterest.png' %}" alt="" /></a>
+
+                <select id="myOption" onchange="run()" style="float:left;margin-top:30px;margin-left:615px;width:200px;height:32px;border:3px solid black;border-radius:4px;text-align:center" >
+                        <option  style="text-align:center" value="volvo">Select your currency</option>
+                        <option value="1">INR</option>
+                        <option value="2">EUR</option>
+                </select>
+            </div>
+    </div>
+	<div class="banner">
+		<div class="banner-layer">
+			<h1 class="title-w3layouts">
+				<span class="fa fa-cart-arrow-down" aria-hidden="true"></span>shopping cart</h1>
+		</div>
+
+		<ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li>Shopping</li>
+        </ul>
+
+		<!-- cart's-Product-Display -->
+		<div class="wthreeproductdisplay">
+			<div class="container">
+				<div class="top-grid">
+					<div class="cart-grid" id="cart-1">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)"  class="item1" id="item1" src="{% static 'product_image/new set/set 1/Darshita-International-Turquoise-Georgette-Dress.jpeg' %}" alt="img"></a>
+						</div>
+						<span class="item1" id="p1">Darshita-International-Turquoise-Georgette-Dress</span>
+						<ul class="info">
+							<li class="item1" id="pd1">$60.00</li>
+							<li class="right-text" id="pd11">$115.00</li>
+						</ul>
+						<div class="snipcart-details ">
+
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="60.00">
+								<input type="hidden" name="item_name" value="Product #001" />
+								<button  onclick="ss(this.id)" id="item1"  class="button w3l-cart" >add to cart</button>
+
+
+						</div>
+					</div>
+					<div class="cart-grid" id="cart-2">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)" class="item2" id="item2" src="{% static 'product_image/new set/set 2/Baalar-Beige-Cotton-Dress-Material.jpeg' %}" alt="img"></a>
+						</div>
+                        <span id="p2" class="item2" >Baalar-Beige-Cotton-Dress-Material</span>
+						<ul class="info">
+							<li id="pd2" class="item2">$95.00</li>
+							<li class="right-text" id="pd22">$195.00</li>
+						</ul>
+						<div class="snipcart-details ">
+
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="95.00">
+								<input type="hidden" name="item_name" value="Product #002" />
+								<button type="submit" onclick="ss(this.id)" class="button w3l-cart" id="item2">add to cart</button>
+
+						</div>
+					</div>
+					<div class="cart-grid" id="cart-3">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)" id="item3" class="item3" src="{% static 'product_image/new set/set 3/Women-Shoppee-Green-Synthetic-Dress.jpeg' %}" alt="img"></a>
+						</div>
+						<span id="p3" class="item3">Women-Shoppee-Green-Synthetic-Dress</span>
+						<ul class="info">
+							<li id="pd3" class="item3">$40.00</li>
+							<li class="right-text" id="pd33">$95.00</li>
+						</ul>
+						<div class="snipcart-details ">
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="40.00">
+								<input type="hidden" name="item_name" value="Product #003" />
+								<button type="submit" onclick="ss(this.id)" class="button w3l-cart" id="item3">add to cart</button>
+
+						</div>
+					</div>
+					<div class="cart-grid" id="cart-4">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)" id="item4" class="item4" src="{% static 'product_image/new set/set 4/Women-Shoppee-Blue-Synthetic-Dress-.jpeg' %}" alt="img"></a>
+						</div>
+						<span id="p4" class="item4">Women-Shoppee-Blue-Synthetic-Dress</span>
+						<ul class="info">
+							<li id="pd4" class="item4">$95.00</li>
+							<li class="right-text" id="pd44">$195.00</li>
+						</ul>
+						<div class="snipcart-details ">
+
+							    <input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="95.00">
+								<input type="hidden" name="item_name" value="Product #004" />
+								<button type="button" onclick="ss(this.id)" class="button w3l-cart" id="item4">add to cart</button>
+
+						</div>
+					</div>
+
+					<div class="clear"></div>
+				</div>
+				<div class="bot-grid">
+					<div class="cart-grid" id="cart-5">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)" class="item5" id="item5" src="{% static 'product_image/new set/set 5/Today-Deal-Yellow-Cotton-Unstitched-.jpg' %}" alt="img"></a>
+						</div>
+						<span id="p5" class="item5">Today-Deal-Yellow-Cotton-Unstitched</span>
+						<ul class="info">
+							<li id="pd5" class="item5">$20.00</li>
+							<li class="right-text" id="pd55">$45.00</li>
+						</ul>
+						<div class="snipcart-details ">
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="20.00">
+								<input type="hidden" name="item_name" value="Product #005" />
+								<button type="submit" onclick="ss(this.id)" class="button w3l-cart" id="item5">add to cart</button>
+
+						</div>
+					</div>
+					<div class="cart-grid" id="cart-6">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)" id="item6" class="item6" src="{% static 'product_image/new set/set 6/Pisara-Orange-Cotton-Dress-Material-.jpeg' %}" alt="img"></a>
+						</div>
+						<span id="p6" class="item6">Pisara-Orange-Cotton-Dress-Material</span>
+						<ul class="info">
+							<li id="pd6" class="item6">$50.00</li>
+							<li class="right-text" id="pd66">$95.00</li>
+						</ul>
+						<div class="snipcart-details ">
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="50.00">
+								<input type="hidden" name="item_name" value="Product #006" />
+								<button type="submit" onclick="ss(this.id)" class="button w3l-cart" id="item6">add to cart</button>
+						</div>
+					</div>
+					<div class="cart-grid" id="cart-7">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)" id="item7" class="item7" src="{% static 'product_image/new set/set 7/Darshita-International-Blue-Georgette-Dress-.jpeg' %}" alt="img"></a>
+						</div>
+						<span id="p7" class="item7">Darshita-International-Blue-Georgette-Dress</span>
+						<ul class="info">
+							<li id="pd7" class="item7">$25.00</li>
+							<li class="right-text" id="pd77">$65.00</li>
+						</ul>
+						<div class="snipcart-details ">
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="25.00">
+								<input type="hidden" name="item_name" value="Product #007" />
+								<button type="submit" onclick="ss(this.id)" class="button w3l-cart" id="item7">add to cart</button>
+
+						</div>
+					</div>
+					<div class="cart-grid" id="cart-8">
+						<div class="img">
+							<a href="{% url 'product-details' %}" target="_blank"><img onclick="myfun(this.id)" id="item8" class="item8" src="{% static 'product_image/new set/set 8/Baalar-White-Cotton-Dress-Material-.jpg' %}" alt="img"></a>
+						</div>
+						<span id="p8" class="item8">Baalar-White-Cotton-Dress-Material</span>
+						<ul class="info">
+							<li id="pd8" class="item8">$36.00</li>
+							<li class="right-text" id="pd88">$84.00</li>
+						</ul>
+						<div class="snipcart-details ">
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="w3l_item" value="Striped Top ">
+								<input type="hidden" name="amount" value="36.00">
+								<input type="hidden" name="item_name" value="Product #008" />
+								<button type="submit" onclick="ss(this.id)" class="button w3l-cart" id="item8">add to cart</button>
+						</div>
+					</div>
+
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	<!-- //cart's-Product-Display -->
+	<!--	<div class="wthreecartaits wthreecartaits2 cart cart box_1">
+			<form action="#" method="post" class="last">
+				<input type="hidden" name="cmd" value="_cart" />
+				<input type="hidden" name="display" value="1" />
+				<button class="w3view-cart" type="submit" name="submit" value="">view cart
+					<span class="fa fa-cart-arrow-down" aria-hidden="true"></span>
+				</button>
+			</form>
+		</div>-->
+		<div class="copyright text-center" style="background-color:#D3D3D3;height:100px;margin-top:10px">
+			<p style="color:black">© 2018 Shopping Cart. All rights reserved
+				</a>
+			</p>
+		</div>
+
+		<div class="alert success" style="display:none;margin-top:5px;position: fixed;top:10px;" id="msg">
+            <span class="closebtn">&times;</span>
+            <strong>Success!</strong> item is added into  cart successfully.
+        </div>
+
+        <div id="popupno" class="modal" style="display:none;align:center">
+        <div class="modal-content" style="float:left;width: 35%;margin-top:6%;margin-left: 31%;height: auto;border:none;">
+            <img src="img/close_ico.png" alt="" onclick="document.getElementById('popupno').style.display='none';" style="float:right;margin-top:5px;margin-right:1%;width:12px;height:14px;">
+                <p style="text-align:center;color:white;background-color:#008080;font-weight:bold;letter-spacing:0.01em; font-size:12px;font-face:Open Sans;height:35px;padding-top:12px">LOGIN TO YOUR ACCOUNT</p>
+                </br>
+                </br>
+                <label style="margin-top:30px;margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Don't have an account yet?</label><a style="font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;" href="{% url 'register' %}"> Register now!</a>
+		        <br>
+		        <br>
+		        </br>
+            <form  action="{% url 'login' %}?next={{ request.path | urlencode }}" method="post">
+                {% csrf_token %}
+                <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Username/Email *</label><input style="margin-left:15px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="text"  placeholder="Username/Email *" name="username" required></input>
+		        </br>
+		        </br>
+		        <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Password *</label><input style="margin-left:55px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="password" placeholder="Password *" name="password" required></input>
+		        <br>
+		        <br>
+		        <center>
+			        <button type="submit" style="width:30%;height:43px;border:none;background-color:#F25330;color:white;border-radius:4px;">Log in</button>
+		        </center>
+
+		    </form>
+
+		        <br>
+		        <br>
+			    <a href=""><label class="re1" style="margin-left:45px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your password?</label></a> <a href="#"><label class="re2" style="margin-left:25px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your username?</label></a>
+
+		        <br>
+		        <br>
+	        	<br>
+        </div>
+    </div>
+
+	</div>
+
+	<!-- Default-JavaScript -->
+	<script src="{% static 'js/jquery-2.2.3.js' %}"></script>
+
+
+	<!-- Custom-JavaScript-File-Links -->
+
+	<!-- cart-js -->
+	<!--<script src="{% static 'js/minicart.min.js' %}"></script>
+	<script>
+		// Mini Cart
+		paypal1.minicart1.render({ //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
+			action: '#'
+		});
+
+		if (~window.location.search.indexOf('reset=true')) {
+			paypal1.minicart1.reset();
+		}
+	</script>-->
+	<!-- //cart-js -->
+    <script>
+// Get the modal
+var modal = document.getElementById('popupno');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</body>
+<!-- //Body -->
+
+</html>

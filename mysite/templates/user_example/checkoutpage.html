@@ -1,0 +1,396 @@
+<html lang="en">
+    <head>
+        {% load staticfiles %}
+        <title>Checkout page</title>
+    </head>
+    <style>
+        body{
+            width:100%;
+            margin:0px auto;
+            background-color:#F0F0F0;
+        }
+        #header
+        {
+            width:100%;
+            height:150px;
+             border:1px solid black;
+             background-color:#D3D3D3;
+             display:flex;
+             margin-bottom:-40px;
+        }
+        #logo
+        {
+            width:30%;
+            height:80px;
+            padding:20px;
+        }
+        img:hover{
+            cursor:pointer;
+            padding:10px;
+        }
+        .main
+        {
+            width:90%;
+            height:550px;
+            background-color:#FFFFFF;
+            margin:0px auto;
+            border-radius:8px;
+        }
+        .accordion
+        {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 70%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        .active,.accordion:hover
+        {
+
+        }
+
+        .accordion:after
+        {
+            content: '\002B';
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after
+        {
+            content: "\2212";
+            color:white;
+        }
+
+        .panel
+        {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            width:66.8%;
+            border:1px solid gray;
+            height:500px
+        }
+        #sign{
+
+        }
+        button:focus
+        {
+            outline: none;
+        }
+        button:hover
+        {
+            cursor:pointer;
+        }
+    </style>
+     <script src="https://checkout.stripe.com/checkout.js"></script>
+     <script>
+        function myf()
+        {
+
+            var user=window.localStorage.getItem("status");
+
+
+
+
+
+        }
+        function address()
+        {
+            var name=document.getElementById("fname").value;
+            var Email=document.getElementById("email").value;
+            var City=document.getElementById("city").value;
+            var contact=document.getElementById("ct").value;
+            var address=document.getElementById("addr").value;
+
+            //alert(address);
+
+            if((name == "")&&(Email == "")&&(City == "")&&(contact == "")&&(address == ""))
+            {
+                alert("please enter all required fields");
+                document.getElementById("fname").style.borderColor = "red";
+                document.getElementById("email").style.borderColor = "red";
+                document.getElementById("city").style.borderColor = "red";
+                document.getElementById("ct").style.borderColor = "red";
+                document.getElementById("addr").style.borderColor = "red";
+            }
+            else
+            {
+
+                window.localStorage.setItem("checked","ok");
+            }
+        }
+
+
+     </script>
+    <script>
+        function payment()
+        {
+            var sss=parseFloat(window.localStorage.getItem("retotal"))*100;
+
+            handler.open({
+                    name: 'WMM',
+                    description: '',
+                    zipCode: true,
+                    amount: sss
+        });
+
+            e.preventDefault();
+
+        }
+    </script>
+    <script>
+        var handler = StripeCheckout.configure({
+            key: 'pk_test_uKUYHVG6Rd9pYEehPCEW1l4E',
+            //image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: function(token) {
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+      alert('Success')
+      localStorage.clear();
+      window.location.href="/";
+  }
+});
+
+
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  handler.close();
+});
+
+    </script>
+    <body onload="myf()">
+
+         <div id="header">
+            <div id="logo">
+                <a href="/"><img style="width:60%" src="{% static 'images\logotop.png' %}" alt="" /></a>
+            </div>
+            <div style="width:70%">
+                <span style="float:right;margin-right:100px;padding:50px;font-weight:bold">100% Payment Protection, Easy Returns Policy</span>
+            </div>
+
+        </div>
+
+        {% if user.is_authenticated %}
+
+             <div id="sign" style="margin-left:20px;display:none">
+
+                <button class="accordion" style="margin-top:30px" >1. Log In / Sign Up</button>
+                <div class="panel" >
+                <br>
+                <br>
+                <label style="margin-top:30px;margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Don't have an account yet?</label><a style="font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;" href="{% url 'register' %}"> Register now!</a>
+		        <br>
+		        <br>
+		        </br>
+            <form  action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Username/Email *</label><input style="margin-left:15px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="text"  placeholder="Username/Email *" name="username" required></input>
+		        </br>
+		        </br>
+		        <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Password *</label><input style="margin-left:55px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="password" placeholder="Password *" name="password" required></input>
+		        <br>
+		        <br>
+
+			    <button type="submit" style="width:20%;height:43px;border:none;background-color:#F25330;color:white;border-radius:4px;margin-left:50px">Log in</button>
+
+
+		   </form>
+
+		        <br>
+		        <br>
+			    <a href="#"><label class="re1" style="margin-left:45px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your password?</label></a> <a href="#"><label class="re2" style="margin-left:25px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your username?</label></a>
+
+			    <br>
+			    <br>
+                </div>
+
+            </div>
+
+         {% else %}
+
+                <div id="sign" style="margin-left:87px;width:88.5%">
+
+                <button class="accordion" style="margin-top:30px;" >1. Log In / Sign Up</button>
+                <div class="panel" >
+                <br>
+                <br>
+                <label style="margin-top:30px;margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Don't have an account yet?</label><a style="font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;" href="{% url 'register' %}"> Register now!</a>
+		        <br>
+		        <br>
+		        </br>
+            <form  action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Username/Email *</label><input style="margin-left:15px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="text"  placeholder="Username/Email *" name="username" required></input>
+		        </br>
+		        </br>
+		        <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Password *</label><input style="margin-left:55px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="password" placeholder="Password *" name="password" required></input>
+		        <br>
+		        <br>
+
+			    <button type="submit" style="width:20%;height:43px;border:none;background-color:#F25330;color:white;border-radius:4px;margin-left:50px">Log in</button>
+
+
+		   </form>
+
+		        <br>
+		        <br>
+			    <a href="#"><label class="re1" style="margin-left:45px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your password?</label></a> <a href="#"><label class="re2" style="margin-left:25px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your username?</label></a>
+
+			    <br>
+			    <br>
+                </div>
+
+            </div>
+         {% endif %}
+
+
+
+        <div class="main">
+            <div id="sign" style="margin-left:20px;display:none">
+
+                <button class="accordion" style="margin-top:30px" >1. Log In / Sign Up</button>
+                <div class="panel" >
+                <br>
+                <br>
+                <label style="margin-top:30px;margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Don't have an account yet?</label><a style="font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;" href="{% url 'register' %}"> Register now!</a>
+		        <br>
+		        <br>
+		        </br>
+            <form  action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Username/Email *</label><input style="margin-left:15px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="text"  placeholder="Username/Email *" name="username" required></input>
+		        </br>
+		        </br>
+		        <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Password *</label><input style="margin-left:55px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="password" placeholder="Password *" name="password" required></input>
+		        <br>
+		        <br>
+
+			    <button type="submit" style="width:20%;height:43px;border:none;background-color:#F25330;color:white;border-radius:4px;margin-left:50px">Log in</button>
+
+
+		   </form>
+
+		        <br>
+		        <br>
+			    <a href="#"><label class="re1" style="margin-left:45px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your password?</label></a> <a href="#"><label class="re2" style="margin-left:25px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your username?</label></a>
+
+			    <br>
+			    <br>
+                </div>
+
+            </div>
+
+            <div id="addresspart" style="margin-left:20px;">
+
+                <button class="accordion" style="margin-top:5px;background-color:gray;" id="">2. DELIVERY ADDRESS</button>
+
+                    <div class="panel" style="">
+                        <form  action="#" method="post">
+                            {% csrf_token %}
+                    <br>
+                    <div id="part1" style="width:50%;height:300px;float:left">
+                        <br>
+
+                        <label for="fname" style="margin-left:20px;" > Full Name</label><br>
+                        <input type="text" id="fname" name="firstname" placeholder="John M. Doe" style="margin-top:20px;margin-left:20px;border-radius:3px;width:70%;height:33px;border:1px solid gray" required>
+
+                        <br>
+                        <br>
+
+                        <label for="fname" style="margin-left:20px;" > Email</label><br>
+                        <input type="text" id="email" name="firstname" placeholder="example@gmail.com" style="margin-top:20px;margin-left:20px;border-radius:3px;width:70%;height:33px;border:1px solid gray" required>
+
+                        <br>
+                        <br>
+
+                        <label for="fname" style="margin-left:20px;" > City</label><br>
+                        <input type="text" id="city" name="firstname" placeholder="erode" style="margin-top:20px;margin-left:20px;border-radius:3px;width:70%;height:33px;border:1px solid gray;margin-bottom:30px" required>
+
+
+
+                    </div>
+                    <div id="part2" style="width:48%;height:300px;float:right">
+                        <br>
+                        <label for="fname" style="margin-left:20px;" > Contact</label><br>
+                        <input type="text"  id="ct" name="firstname" maxlength="10" placeholder="" style="margin-top:20px;margin-left:20px;border-radius:3px;width:70%;height:33px;border:1px solid gray" required>
+
+                         <br>
+                        <br>
+
+                        <label for="fname" style="margin-left:20px;" > Address</label>
+                        <br>
+                        <br>
+                        <textarea  id="addr"  style="margin-left:20px;border-radius:3px;width:70%;height:100px;border:1px solid gray" ></textarea>
+
+                    </div>
+
+                    </br>
+                    </br>
+
+                         <center><button style="width:18%;height:35px;border-radius:23px;border:1px solid black;transition: all .2s ease-in-out;letter-spacing: 1px;border: none;" type="submit" onclick="address()">Continue checkout</button></center>
+
+                    <br>
+                    <br>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <div id="" style="margin-left:20px;">
+
+                <button class="accordion" style="margin-top:5px;background-color:gray" id="sign">3. MAKE PAYMENT</button>
+                <div class="panel">
+                    <br>
+                    <br>
+                    <center><button id="customButton" style="width:18%;height:35px;border-radius:23px;border:1px solid black;transition: all .2s ease-in-out;letter-spacing: 1px;border: none;" onclick="payment(); ">Proceed</button></center>
+
+                <br>
+                <br>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <div  style="background-color:#D3D3D3;height:80px;margin-top:0px">
+			<p style="color:black;text-align:center;padding-top:40px">© 2018 Shopping Cart. All rights reserved </p>
+		</div>
+
+    </body>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++)
+        {
+            acc[i].addEventListener("click", function()
+            {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight)
+                {
+                    panel.style.maxHeight = null;
+                }
+                else
+                {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                 }
+            });
+        }
+    </script>
+</html>

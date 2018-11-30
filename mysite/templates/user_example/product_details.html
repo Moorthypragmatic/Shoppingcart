@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="US-en">
+<!-- Head -->
+
+<head>
+    <title></title>
+
+	{% load static %}
+	<!-- Meta-Tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'style/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/jquery-picZoomer.css' %}">
+
+
+
+
+		<style>
+		body{
+		    width:100%;
+		    margin:0px auto;
+		    overflow-x:hidden;
+		}
+	    ul.breadcrumb
+	    {
+            padding: 10px 16px;
+            list-style: none;
+            background-color: #eee;
+            margin:0px auto;
+
+        }
+
+        /* Display list items side by side */
+        ul.breadcrumb li
+        {
+            display: inline;
+            font-size: 18px;
+        }
+
+        /* Add a slash symbol (/) before/behind each list item */
+        ul.breadcrumb li+li:before
+        {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
+        }
+
+        /* Add a color to all links inside the list */
+        ul.breadcrumb li a
+        {
+            color: #0275d8;
+            text-decoration: none;
+        }
+
+        /* Add a color on mouse-over */
+        ul.breadcrumb li a:hover
+        {
+            color: #01447e;
+            text-decoration: underline;
+        }
+        img:hover
+        {
+            cursor:pointer;
+        }
+        #org-image{
+            margin-left:10px;
+            width:200px;
+            margin-top:100px;
+        }
+        #org-image img{
+            padding:10px;
+        }
+        #search{
+            width:10%;
+            margin-left:5px;
+            margin-top:0px;
+        }
+        /* custom style */
+    .picZoomer-pic-wp,
+    .picZoomer-zoom-wp{
+        border: 1px solid #fff;
+    }
+    button:hover{
+        cursor:pointer;
+        background-color:black;
+    }
+    li img:hover{
+        cursor:pointor;
+        outline: 1px solid black;
+        border:none;
+
+    }
+    li img{
+        width:60%;
+        height:60%;
+        margin-top:30px;
+    }
+    #relpro{
+        margin-left:60px;
+
+
+    }
+    a:hover
+	    {
+		    cursor:pointer;
+		    color:#F25330;
+    	}
+        a
+        {
+            color:black;
+
+        }
+    .modal
+	    {
+            display: none;
+            position: fixed;
+            z-index: 15000;
+            padding-top: 5%;
+            left: 0;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+
+        }
+        .modal-content
+        {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0px 0px;border-radius:5px;
+            border: 1px solid #888;
+            width: 90%;
+            height: 97%;
+            overflow-y: hidden;
+            overflow-x: hidden;
+
+        }
+         #header
+        {
+            width:100%;
+            height:250px;
+             border:1px solid black;
+             background-color:white;
+             display:flex;
+             margin-bottom:-40px;
+        }
+        #logo
+        {
+            width:50%;
+            height:80px;
+            padding:20px;
+        }
+	</style>
+
+
+	    <script>
+
+	    function onload(){
+	        var x=window.localStorage.getItem("item");
+
+	        var pprice=window.localStorage.getItem("price");
+
+	        var pprice1=window.localStorage.getItem("price1");
+
+	        var name=window.localStorage.getItem("name");
+
+
+
+
+
+            var ic=window.localStorage.getItem("itemtotal");
+            document.getElementById("itemcount").innerHTML = ic;
+
+	        //alert(pprice);
+
+	        document.getElementById('pt').innerHTML=name;
+	        if(x == 'item1')
+	        {
+
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 1/Darshita-International-Turquoise-Georgette-Dress.jpeg' %}";
+
+                document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 1/Darshita-International-Turquoise-Georgette-Dress.jpeg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 1/2.jpeg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 1/3.jpeg' %}";
+                document.getElementById('ss4').src="{% static 'product_image/new set/set 1/4.jpeg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 1/Darshita-International-Turquoise-Georgette-Dress.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 7/Darshita-International-Blue-Georgette-Dress-.jpeg' %}";
+
+
+
+	        }
+	        else if(x == 'item2')
+	        {
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 2/Baalar-Beige-Cotton-Dress-Material.jpeg' %}";
+
+	            document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 2/Baalar-Beige-Cotton-Dress-Material.jpeg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 2/2.jpeg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 2/3.jpeg' %}";
+                document.getElementById('ss4').src="{% static 'product_image/new set/set 2/4.jpeg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 2/Baalar-Beige-Cotton-Dress-Material.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 8/Baalar-White-Cotton-Dress-Material-.jpg' %}";
+
+
+	        }
+	        else if(x == 'item3')
+	        {
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 3/Women-Shoppee-Green-Synthetic-Dress.jpeg' %}";
+
+	            document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 3/Women-Shoppee-Green-Synthetic-Dress.jpeg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 3/1.jpeg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 3/2.jpeg' %}";
+                document.getElementById('ss4').src="{% static 'product_image/new set/set 3/3.jpeg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 4/Women-Shoppee-Blue-Synthetic-Dress-.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 3/Women-Shoppee-Green-Synthetic-Dress.jpeg' %}";
+	        }
+	        else if(x == 'item4')
+	        {
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 4/Women-Shoppee-Blue-Synthetic-Dress-.jpeg' %}";
+
+	            document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 4/Women-Shoppee-Blue-Synthetic-Dress-.jpeg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 4/2.jpeg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 4/3.jpeg' %}";
+                document.getElementById('ss4').src="{% static 'product_image/new set/set 4/4.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 4/Women-Shoppee-Blue-Synthetic-Dress-.jpeg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 3/Women-Shoppee-Green-Synthetic-Dress.jpeg' %}";
+	        }
+	        else if(x == 'item5')
+	        {
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 5/Today-Deal-Yellow-Cotton-Unstitched-.jpg' %}";
+
+	            document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 5/Today-Deal-Yellow-Cotton-Unstitched-.jpg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 5/2.jpg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 5/3.jpg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 6/Pisara-Orange-Cotton-Dress-Material-.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 5/Today-Deal-Yellow-Cotton-Unstitched-.jpg' %}";
+
+	        }
+	        else if(x == 'item6')
+	        {
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 6/Pisara-Orange-Cotton-Dress-Material-.jpeg' %}";
+
+	            document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 6/Pisara-Orange-Cotton-Dress-Material-.jpeg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 6/2.jpeg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 6/3.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 6/Pisara-Orange-Cotton-Dress-Material-.jpeg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 5/Today-Deal-Yellow-Cotton-Unstitched-.jpg' %}";
+
+	        }
+	        else if(x == 'item7')
+	        {
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 7/Darshita-International-Blue-Georgette-Dress-.jpeg' %}";
+
+	            document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 7/Darshita-International-Blue-Georgette-Dress-.jpeg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 7/2.jpeg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 7/3.jpeg' %}";
+                document.getElementById('ss4').src="{% static 'product_image/new set/set 7/4.jpeg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 1/Darshita-International-Turquoise-Georgette-Dress.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 7/Darshita-International-Blue-Georgette-Dress-.jpeg' %}";
+
+	        }
+	        else if(x == 'pt1')
+	        {
+	            document.getElementById('productimage').src="{% static 'images\p1.png' %}";
+	            document.getElementById('pp1').innerHTML=pprice+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('product1').style.display='none';
+                document.getElementById('ss').style.display='none';
+	        }
+	        else if(x == 'pt2')
+	        {
+	            document.getElementById('productimage').src="{% static 'images\p2.png' %}";
+	            document.getElementById('pp1').innerHTML=pprice+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('product1').style.display='none';
+                document.getElementById('ss').style.display='none';
+	        }
+	        else if(x == 'pt3')
+	        {
+	            document.getElementById('productimage').src="{% static 'images\p3.png' %}";
+	            document.getElementById('pp1').innerHTML=pprice+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('product1').style.display='none';
+                document.getElementById('ss').style.display='none';
+	        }
+	        else if(x == 'pt4')
+	        {
+	            document.getElementById('productimage').src="{% static 'images\p4.png' %}";
+	            document.getElementById('pp1').innerHTML=pprice+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('product1').style.display='none';
+                document.getElementById('ss').style.display='none';
+	        }
+	        else
+	        {
+	            document.getElementById('productimage').src="{% static 'product_image/new set/set 8/Baalar-White-Cotton-Dress-Material-.jpg' %}";
+
+	            document.getElementById('pp1').innerHTML='<strike>'+pprice1+'</strike>'+"&nbsp;"+'(Inclusive of all taxes)';
+                document.getElementById('pp11').innerHTML=pprice;
+
+                document.getElementById('title').innerHTML=name;
+
+                document.getElementById('ss1').src="{% static 'product_image/new set/set 8/Baalar-White-Cotton-Dress-Material-.jpg' %}";
+                document.getElementById('ss2').src="{% static 'product_image/new set/set 8/2.jpg' %}";
+                document.getElementById('ss3').src="{% static 'product_image/new set/set 8/3.jpg' %}";
+                document.getElementById('ss4').src="{% static 'product_image/new set/set 8/4.jpg' %}";
+
+                document.getElementById('item1').src="{% static 'product_image/new set/set 2/Baalar-Beige-Cotton-Dress-Material.jpeg' %}";
+
+                document.getElementById('item2').src="{% static 'product_image/new set/set 8/Baalar-White-Cotton-Dress-Material-.jpg' %}";
+
+	        }
+
+	        var userin=window.localStorage.getItem('status1');
+	        var user=window.localStorage.getItem('status');
+
+
+
+	        if(userin == 'login1')
+	        {
+                document.getElementById('user').style.display="block";
+                document.getElementById('linkid').style.display="none";
+	        }
+            else if(user == 'login')
+            {
+                 alert(user);
+                 document.getElementById('user').style.display="block";
+                 document.getElementById('linkid').style.display="none";
+                 document.getElementById('log1').style.display="none";
+            }
+            else
+            {
+                document.getElementById('user').style.display="none";
+            }
+	    }
+        function hover(element)
+        {
+                    //element.setAttribute('src', 'http://dummyimage.com/100x100/eb00eb/fff');
+                    //alert(element);
+                    var x=window.localStorage.getItem("item");
+                    if(x == 'item1')
+	                {
+
+                        if(element == 'ss1')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 1/Darshita-International-Turquoise-Georgette-Dress.jpeg' %}";
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+
+                        }
+                        else if(element == 'ss2')
+                         {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 1/2.jpeg' %}";
+                              document.getElementById('ss1').style.border="none";
+                              document.getElementById('ss2').style.border="1px solid black";
+                             document.getElementById('ss3').style.border="none";
+                             document.getElementById('ss4').style.border="none";
+                        }
+                        else if(element == 'ss3')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 1/3.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                              document.getElementById('ss2').style.border="none";
+                             document.getElementById('ss3').style.border="1px solid black";
+                             document.getElementById('ss4').style.border="none";
+                        }
+                        else
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 1/4.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="1px solid black";
+
+                        }
+	                }
+	                else if(x == 'item2')
+	                {
+	                    if(element == 'ss1')
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 2/Baalar-Beige-Cotton-Dress-Material.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else if(element == 'ss2')
+                         {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 2/2.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="1px solid black";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else if(element == 'ss3')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 2/3.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="1px solid black";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 2/4.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="1px solid black";
+                        }
+	                }
+	                 else if(x == 'item3')
+	                {
+	                    if(element == 'ss1')
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 3/Women-Shoppee-Green-Synthetic-Dress.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else if(element == 'ss2')
+                         {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 3/1.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="1px solid black";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else if(element == 'ss3')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 3/2.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="1px solid black";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 3/3.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="1px solid black";
+                        }
+	                }
+	                 else if(x == 'item4')
+	                {
+	                    if(element == 'ss1')
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 4/Women-Shoppee-Blue-Synthetic-Dress-.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else if(element == 'ss2')
+                         {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 4/2.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="1px solid black";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else if(element == 'ss3')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 4/3.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="1px solid black";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 4/4.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="1px solid black";
+                        }
+	                }
+	                else if(x == 'item5')
+	                {
+                        if(element == 'ss1')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 5/Today-Deal-Yellow-Cotton-Unstitched-.jpg' %}";
+
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+
+
+                        }
+                        else if(element == 'ss2')
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 5/2.jpg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="1px solid black";
+                            document.getElementById('ss3').style.border="none";
+
+
+                        }
+                        else
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 5/3.jpg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="1px solid black";
+
+                        }
+	                }
+	                else if(x == 'item6')
+	                {
+                        if(element == 'ss1')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 6/Pisara-Orange-Cotton-Dress-Material-.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+
+                        }
+                        else if(element == 'ss2')
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 6/2.jpeg' %}";
+
+                             document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="1px solid black";
+                            document.getElementById('ss3').style.border="none";
+
+                        }
+                        else
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 6/3.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="1px solid black";
+                        }
+	                }
+	                else if(x == 'item7')
+	                {
+                        if(element == 'ss1')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 7/Darshita-International-Blue-Georgette-Dress-.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+
+                        }
+                        else if(element == 'ss2')
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 7/2.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="1px solid black";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+
+                        }
+                        else if(element == 'ss3')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 7/3.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="1px solid black";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 7/4.jpeg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="1px solid black";
+                        }
+	                }
+	                else
+	                {
+	                    if(element == 'ss1')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 8/Baalar-White-Cotton-Dress-Material-.jpg' %}";
+
+                            document.getElementById('ss1').style.border="1px solid black";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+
+                        }
+                        else if(element == 'ss2')
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 8/2.jpg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="1px solid black";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="none";
+
+                        }
+                        else if(element == 'ss3')
+                        {
+                            document.getElementById('productimage').src="{% static 'product_image/new set/set 8/3.jpg' %}";
+
+                            document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="1px solid black";
+                            document.getElementById('ss4').style.border="none";
+                        }
+                        else
+                        {
+                             document.getElementById('productimage').src="{% static 'product_image/new set/set 8/4.jpg' %}";
+
+                             document.getElementById('ss1').style.border="none";
+                            document.getElementById('ss2').style.border="none";
+                            document.getElementById('ss3').style.border="none";
+                            document.getElementById('ss4').style.border="1px solid black";
+                        }
+	                }
+
+
+        }
+        function productshow()
+        {
+
+            document.getElementById('cart').style.display='block';
+
+            var imgsel = document.getElementById('productimage').src;
+
+            var name = document.getElementById('title').innerHTML;
+
+            var price = document.getElementById('pp11').innerHTML;
+
+
+            document.getElementById('adim').src=imgsel;
+            document.getElementById('pname').innerHTML=name;
+            document.getElementById('pprice').innerHTML=price;
+            document.getElementById('subtotal').innerHTML=price;
+            document.getElementById('subtotal1').innerHTML=price;
+
+            var total=price.split("$")[1];
+
+
+            document.getElementById('total').innerHTML=price;
+
+            window.localStorage.setItem("retotal",total);
+
+        }
+        function Quantity()
+        {
+            var x = document.getElementById("qi").value;
+            //alert(x);
+
+            var qty=document.getElementById('pprice').innerHTML;
+            var qy=qty.split("$")[1];
+            var subtot=x*qy;
+            //alert(parseFloat(subtot));
+
+            document.getElementById('subtotal').innerHTML='$'+parseFloat(subtot);
+            document.getElementById('subtotal1').innerHTML='$'+parseFloat(subtot);
+
+            document.getElementById('total').innerHTML='$'+parseFloat(subtot);
+
+            window.localStorage.setItem("retotal",subtot);
+
+
+        }
+        function Buypay()
+        {
+            var price = document.getElementById('pp11').innerHTML;
+            var total=price.split("$")[1];
+            //alert(total);
+
+            window.localStorage.setItem("retotal",total);
+        }
+	</script>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.picZoomer.js' %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.picZoomer').picZoomer();
+        });
+    </script>
+
+
+</head>
+<body onload="onload()">
+    <div id="header">
+            <div id="logo">
+                <a href="/"><img style="width:60%" src="{% static 'images\logotop.png' %}" alt="" /></a>
+            </div>
+
+            <div>
+
+               {% if user.is_authenticated %}
+
+                  <div class="links" style="display:flex;float:right;margin-right:170px;margin-top:30px;font-family:'Times New Roman', Times, serif;font-size:20px;">
+                         <a  style="color:black;text-decoration:none;" id="link1" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" onclick="document.getElementById('popupno').style.display='none'">Hi, {{user.username}} </a>  |  <a style="color:black;text-decoration:none" id="link2" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'logout' %}?next={{ request.path | urlencode }}" >Log out</a>  |  <a style="color:black;text-decoration:none" id="link3" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'cartdetails' %}" >Cart (<span  id="itemcount"  >0</span>) </a>
+                  </div>
+
+               {% else %}
+
+                 <div class="links" id="linkid1" style="display:flex;float:right;margin-right:170px;margin-top:30px;font-family:'Times New Roman', Times, serif;font-size:20px;">
+                         <a  style="color:black;text-decoration:none;" id="link1" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" onclick="document.getElementById('popupno').style.display='block'">Login</a>  |  <a style="color:black;text-decoration:none" id="link2" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'register' %}" >Register</a>  |  <a style="color:black;text-decoration:none" id="link3" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'cartdetails' %}" >Cart (<span  id="itemcount"  >0</span>) </a>
+                  </div>
+
+               {% endif %}
+
+                <input type="text" id="search" placeholder="Search products,Categories,Tags" style="margin-left:100px;margin-top:50px;height:25px;border:3px solid black;width:250px" />
+                <button style="width:33px;height:33px;padding-bottom:10px;margin-left:-5px;margin-top:50px;background-repeat:no-repeat;border:3px solid black;border-left: none;border-radius:3px;background-image:url({% static 'images/search.png' %})"></button>
+
+                <br>
+                <a href="https://twitter.com/login?lang=en" id="bottle" ><img  id="tw" style="float:left;margin-left:615px;width:5%;margin-top:0px;" src="{% static 'images\tw.png' %}" alt="" /></a>
+                <a href="https://www.facebook.com/"><img style="float:left;margin-left:15px;width:5%;margin-top:0px;" src="{% static 'images\fb.png' %}" alt="" /></a>
+                <a href="https://in.pinterest.com/"><img style="float:left;margin-left:15px;width:5%;margin-top:0px;" src="{% static 'images\pinterest.png' %}" alt="" /></a>
+
+                <select id="myOption" onchange="run()" style="float:left;margin-top:30px;margin-left:615px;width:200px;height:32px;border:3px solid black;border-radius:4px;text-align:center" >
+                        <option  style="text-align:center" value="volvo">Select your currency</option>
+                        <option value="1">INR</option>
+                        <option value="2">EUR</option>
+                        <option value="3">AUD</option>
+                </select>
+            </div>
+
+    </div>
+    <ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'shop' %}">Products</a></li>
+            <li><span id="pt"></span></li>
+    </ul>
+    <div id="design" style="height:500px">
+        <div id="initial" style="width:10%;height:450px;float:left">
+
+            <div id="ss" style="margin-top:50px">
+                <ul >
+                    <li ><center><img id="ss1" style="width:40%;border:1px solid black;" src="" onmouseover="hover(this.id);" onmouseout="" ></center></li>
+                    <li ><center><img id="ss2" style="width:40%;margin-top:30px;"src="" onmouseover="hover(this.id);" ></center></li>
+                    <li ><center><img id="ss3" style="width:40%;margin-top:30px;"src="" onmouseover="hover(this.id);" ></center></li>
+                    <li ><center><img id="ss4" style="width:40%;margin-top:30px;"src="" onmouseover="hover(this.id);" ></center></li>
+
+                </ul>
+
+            </div>
+
+
+
+        </div>
+
+        <div id="first" style="width:30%;float:left;">
+
+            <div id="org-image" class="picZoomer" style="width:70%;">
+                <img id="productimage" style="width:100%" src="" />
+            </div>
+
+            <div style="width:200px;margin-left:100px;margin-top:20px">
+                <img id="search" src="{% static 'product_image/Search.png' %}" /><span style="margin-left:10px;font-size: 13px;">Hover to Zoom</span>
+            </div>
+
+        </div>
+
+            <div id="second" style="width:58%;float:right;margin-top:100px;">
+
+                <h1 style="letter-spacing:0.1em" id="title"></h1>
+
+                <br>
+                <span style="color:grey;font-size:13px" class="right-text" id="pp1"></span>
+
+                <br/>
+                <br/>
+
+                <span style="color:#FF2341;font-size:26px" id="pp11"> </span>
+
+                <br>
+                <br>
+
+
+                <div style="margin-top:100px">
+
+                    <button style="background-color:black;color:WHITE;width:18%;height:55px;font-size:14px;border-radius:3px" id="addto" onclick="productshow()">ADD TO CART</button>
+
+                    <a href="{% url 'checkout' %}" target="_blank"><button style="background-color:#D1203C;color:WHITE;width:18%;height:55px;font-size:14px;border-radius:3px;margin-left:20px" id="buy" onclick="Buypay()">BUY NOW</button></a>
+
+                </div>
+
+
+
+        </div>
+    </div>
+    <div id="desc"  style="height:400px;width:100%;">
+
+        <h1 style="margin-left:50px;font-size:20px;"><u style="text-decoration-color: red;">Item Details</u></h1>
+
+          <div  style="margin-top:40px;width:100%;">
+                <h4 style="font-weight: bold;margin-left:50px;text-decoration-color: red;">Highlights</h4>
+                <ul  style="width:30%;float:left;margin-top:30px;margin-left:50px">
+                    <li style="padding-bottom:10px"><a>Set Contents:With Dupatta</a></li>
+                    <li style="padding-bottom:10px">Work:Printed</li>
+                    <li style="padding-bottom:10px">Product weight(in kgs):0.48</li>
+                </ul>
+                <ul  type="disc" style="width:30%;float:left;margin-top:30px;">
+                    <li style="padding-bottom:10px">Color:Brown</li>
+                    <li style="padding-bottom:10px">Top Fabric:Crepe</li>
+                    <li style="padding-bottom:10px">Disclaimer:Product Colour May Slightly Vary Due to Photographic Lighting Sources or Your Monitor Settings.</li>
+                </ul>
+                <ul type="disc" style="width:30%;float:right;margin-bottom:20px;margin-top:30px">
+                    <li style="padding-bottom:10px">Bottom Color:Off White</li>
+                    <li style="padding-bottom:10px">Top Length(in metres):2.5</li
+                    <li style="padding-bottom:10px">Recommended Fabric Care:Dry Clean</li>
+
+                </ul>
+        </div>
+        <div  style="width:100%;height:200px;margin-top:100px;margin-left:50px;float:left">
+                <h4 style="font-weight: bold;text-decoration-color: red;"><u style="text-decoration-color: red;">Terms & Conditions</u></h4>
+                <li style="padding-bottom:10px;margin-top:30px">The images represent actual product though color of the image and product may slightly differ.</li>
+        </div>
+
+    </div>
+
+    <div style="width:100%;">
+
+        <h1 style="text-align:center;margin-top:0px" >Releted Products</h1>
+        <div id="product1" style="float:left;width:100%;height:450px;margin-top:20px;margin-left:60px">
+
+
+                <img id="item1" style="width:20%;margin-left:80px" src="">
+                 <img id="item2" style="width:20%;margin-left:350px" src="">
+                <br>
+                <span style="margin-left:80px">Baalar-White-Cotton-Dress-Material</span>
+                <span style="margin-left:410px">Baalar-Beige-Cotton-Dress-Material</span>
+
+                <br>
+                <br>
+                <span style="margin-left:150px;">$ 60.00</span>
+                <span style="margin-left:600px;">$ 120.00</span>
+                <br>
+                <button style="background-color:#0F3370;color:white;width:15%;height:35px;margin-left:80px;margin-top:10px">ADD TO CART</button>
+                <button style="background-color:#0F3370;color:white;width:15%;height:35px;margin-left:450px;margin-top:10px">ADD TO CART</button>
+
+
+
+
+
+        </div>
+
+        <div  style="background-color:#D3D3D3;height:100px;margin-top:450px">
+			<p style="color:black;text-align:center;padding-top:40px">© 2018 Shopping Cart. All rights reserved </p>
+		</div>
+
+
+
+    </div>
+
+    <div id="cart" class="modal" style="display:none;align:center;width:100%;border:1px solid black">
+
+        <div class="modal-content" style="width:100% %;margin-top:6%;margin-left: 31%;margin:0px auto;height: auto;border:none;">
+
+                <p style="text-align:center;color:white;background-color:#008080;font-weight:bold;letter-spacing:0.01em; font-size:12px;font-face:Open Sans;height:35px;padding-top:12px">Shopping Cart</p>
+                </br>
+                <div style="padding:15px">
+                <div id="" style="float:left;width:35%;margin-bottom:15px;text-align:center" ><span>Item details</span></div>
+                <div id="" style="float:left;width:10%;text-align:center" ><span>price</span></div>
+                <div id="" style="float:left;width:10%;text-align:center" ><span>Quantity</span></div>
+                <div id="" style="float:left;width:35%;text-align:center" ><span>Delivery with Charges</span></div>
+                <div id="" style="float:right;width:9.6%;text-align:center" ><span>Subtotal</span></div>
+
+                </div>
+
+                <div id="details" style="width:100%;display:flex;padding:10px;border:1px solid black">
+                    <div id="pimgae" style="width:10%" ><img id="adim"  style="width:100%;" src="" ></div>
+                    <div id="prname" style="width:25%;text-align:center;line-height: 100px;" ><span id="pname" style="display: inline-block;horizontal-align: middle;line-height: normal;"></span></div>
+                    <div id="prprice" style="width:10%;text-align:center;line-height: 100px;" ><span id="pprice" style="display: inline-block;horizontal-align: middle;line-height: normal;"></span></div>
+                    <div id="qty" style="width:10%;text-align:center;line-height: 100px;">
+                        <select id="qi" onchange="Quantity()" style="border-radius:3px;width:50%;height:35px;padding:10px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <div style="width:35%;text-align:center;line-height: 100px;line-width: 100px"><p style="">Check availability and delivery charges for your pincode</p></div>
+                    <div id="prprice" style="width:10%;text-align:center;line-height: 100px;" ><span id="subtotal" style="display: inline-block;horizontal-align: middle;line-height: normal;" ></span></div>
+                </div>
+                <div id="footer" style="width:100%;height:100px;background-color:BLACK;">
+
+                        <div style="color:white;float:right;margin-right:400px;margin-top:20px" >Sub total: <span id="subtotal1" style="color:white;margin-left:120px"></span> </div>
+                        <br>
+
+                        <div style="color:white;float:left;margin-left:585px;margin-top:30px" >Delivery Charges: <span id="" style="color:white;margin-left:50px">+&nbsp; $ 10.0</span> </div>
+
+                        <a href="{% url 'checkout' %}" target="_blank"><button style="background-color:#E40046;color:white;margin-left:80px;height:45px;padding:10px;border-radius:3px"; >PROCEED TO PAY <span id="total" style="color:white"></span></button></a>
+                </div>
+
+
+        </div>
+
+    </div>
+
+    <div id="popupno" class="modal" style="display:none;align:center">
+        <div class="modal-content" style="float:left;width: 35%;margin-top:6%;margin-left: 31%;height: auto;border:none;">
+            <img src="img/close_ico.png" alt="" onclick="document.getElementById('popupno').style.display='none';" style="float:right;margin-top:5px;margin-right:1%;width:12px;height:14px;">
+                <p style="text-align:center;color:white;background-color:#008080;font-weight:bold;letter-spacing:0.01em; font-size:12px;font-face:Open Sans;height:35px;padding-top:12px">LOGIN TO YOUR ACCOUNT</p>
+                </br>
+                </br>
+                <label style="margin-top:30px;margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Don't have an account yet?</label><a style="font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;" href="{% url 'register' %}"> Register now!</a>
+		        <br>
+		        <br>
+		        </br>
+            <form  action="{% url 'login' %}?next={{ request.path | urlencode }}" method="post">
+                {% csrf_token %}
+                <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Username/Email *</label><input style="margin-left:15px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="text"  placeholder="Username/Email *" name="username" required></input>
+		        </br>
+		        </br>
+		        <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Password *</label><input style="margin-left:55px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="password" placeholder="Password *" name="password" required></input>
+		        <br>
+		        <br>
+		        <center>
+			        <button type="submit" style="width:30%;height:43px;border:none;background-color:#F25330;color:white;border-radius:4px;">Log in</button>
+		        </center>
+
+		    </form>
+
+		        <br>
+		        <br>
+			    <a href="#"><label class="re1" style="margin-left:45px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your password?</label></a> <a href="#"><label class="re2" style="margin-left:25px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your username?</label></a>
+
+		        <br>
+		        <br>
+	        	<br>
+        </div>
+    </div>
+
+
+</body>
+<script>
+// Get the modal
+var modal = document.getElementById('cart');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+var modal = document.getElementById('popupno');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</html>

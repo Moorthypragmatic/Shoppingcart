@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Women Make Men</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="Shopping Cart a Responsive Web Template, Shopping cart, online shopping,new look, easy purchage">
+
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS\styles.css' %}"/>
+    <link href="{% static 'toastr\build\toastr.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS\Style.css' %}" >
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'toastr\toastr.js' %}"></script>
+
+
+
+   <style>
+       .links a:hover
+       {
+            text-decoration:underline;
+       }
+
+	    .re1,.re2,button:hover
+	    {
+		    cursor:pointer;
+
+        }
+	    a:hover
+	    {
+		    cursor:pointer;
+		    color:#F25330;
+    	}
+        a
+        {
+            color:black;
+
+        }
+        #item1:hover{
+            cursor:pointer;
+            border:3px solid black;
+        }
+        #item2:hover{
+            cursor:pointer;
+            border:3px solid black;
+        }
+        #item3:hover{
+            cursor:pointer;
+            border:3px solid black;
+        }
+         #item4:hover{
+            cursor:pointer;
+            border:3px solid black;
+        }
+        .add2:hover,.add3:hover
+        {
+                border-radius: 12px;
+                cursor: pointer;
+                color: #0071ff;
+                background-color: black;
+                -webkit-animation: ease-in-out;
+        }
+	    .modal
+	    {
+            display: none;
+            position: fixed;
+            z-index: 15000;
+            padding-top: 5%;
+            left: 0;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+
+        }
+        .modal-content
+        {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0px 0px;border-radius:5px;
+            border: 1px solid #888;
+            width: 90%;
+            height: 97%;
+            overflow-y: hidden;
+            overflow-x: hidden;
+
+        }
+
+
+   </style>
+    <script >
+
+
+         var itemset = window.localStorage.getItem("carttable");
+
+         var itemCount=window.localStorage.getItem('itemtotal');
+
+        if(itemset == null)
+        {
+            itemset="";
+
+            var itemCount=0;
+			document.getElementById("itemcount").innerHTML = "0";
+        }
+        else
+        {
+            var itemset = window.localStorage.getItem("carttable");
+
+        }
+
+        //var itemset = "";
+       // document.getElementById("itemcount").innerHTML = itemCount;
+        //document.getElementById("itemcount1").innerHTML = itemCount1;
+
+
+        function ss(idv)
+        {
+
+
+            itemCount++;
+            //itemCount1++;
+           // alert(itemCount);
+            window.localStorage.setItem('itemtotal',itemCount);
+            document.getElementById("itemcount").innerHTML = itemCount;
+
+            const itemimg = document.getElementsByClassName("" + idv)[0].src;
+            const itemname = document.getElementsByClassName("" + idv)[1].innerHTML;
+            const itemprice = document.getElementsByClassName("" + idv)[2].innerHTML;
+
+            var totalid = "totval" + itemCount;
+            //var itemprice1 = itemprice.split("$")[1];
+
+
+
+            //alert(itemprice);
+
+            //var totalid = "totval" + itemCount;
+            //var itemprice1 = itemprice.split("$")[1];
+
+            /*itemset += '<div id="prodec" class="productitm">';
+            itemset += '<div class="productimage"><img  src="' +itemimg+ '" class="pt"></div>';
+            itemset += '<div class="productname">'+itemname+'</div>';
+            itemset += '<div class="quantity"><input class="qty" type="number" value="1" min="1" max="99" onclick="qtytotal(this,'+totalid+','+itemprice1+');" class="qtyinput"></div>';
+            itemset += '<div class="price1">'+itemprice+'</div>';
+            itemset += '<div class="linetotal"><span id="'+totalid+'">'+itemprice+'</span></div>';
+            itemset += '<div class="delete"><span class="remove" onclick="myfun(this,'+totalid+');"><img src="{% static 'images\trash.png' %}" alt="X" /></span></div></div>';*/
+
+            itemset += '<tr class="productitm">';
+            itemset += '<td><img src="' +itemimg+ '" class="thumb"></td>';
+            itemset += '<td>'+itemname+'</td>';
+            itemset += '<td><input type="number" value="1" min="1" max="99" onclick="qtytotal(this,'+totalid+','+itemprice+');" class="qtyinput"></td>';
+            itemset += '<td>'+itemprice+'</td>';
+            itemset += '<td><span id="'+totalid+'">'+itemprice+'</span></td>';
+            itemset += '<td><span class="remove" onclick="remove(this,'+itemCount+');"><img src="{% static 'images\trash.png' %}" alt="X" /></span></td></tr>';
+
+            window.localStorage.setItem("carttable",itemset);
+
+            //alert(productitm);
+
+            try {
+                toast();
+            }
+            catch (e) {
+                alert(e);
+            }
+
+        }
+        function load(){
+
+            var ic=window.localStorage.getItem("itemtotal");
+            document.getElementById("itemcount").innerHTML = ic;
+
+            var method=window.localStorage.getItem('status');
+
+            //alert(method);
+        }
+
+
+        function toast() {
+
+
+            toastr.options = {
+"closeButton": false,
+"debug": false,
+"positionClass": "toast-top-center",
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "2000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}
+            toastr.info("Item added to cart successfully!", "");
+}
+
+    </script>
+    <script>
+
+        function run()
+        {
+            var x = document.getElementById("myOption").value;
+            //document.getElementById("demo").innerHTML = x;
+            //alert(x);
+
+            var result=0;
+            if(x == 1)
+            {
+                //alert('you are selected Indian rupee');
+                result=x;
+                //alert(result);
+                //var value=document.getElementById('pt1').value;
+
+                window.localStorage.setItem("currency",x);
+
+                //document.getElementById('symbol').innerHTML="&#8377;"
+
+                document.getElementById('pt11').innerHTML="&nbsp;"+"955.00";
+                document.getElementById('pt22').innerHTML="&nbsp;"+"500.00";
+                document.getElementById('pt33').innerHTML="&nbsp;"+"129.00";
+                document.getElementById('pt44').innerHTML="&nbsp;"+"539.00";
+            }
+            else if(x == 2)
+            {
+                //alert('you are selected European Doller');
+                result=x;
+                document.getElementById('pt11').innerHTML="&euro;"+"&nbsp;"+"11.24";
+                document.getElementById('pt22').innerHTML="&euro;"+"&nbsp;"+"5.89";
+                document.getElementById('pt33').innerHTML="&euro;"+"&nbsp;"+"1.52";
+                document.getElementById('pt44').innerHTML="&euro;"+"&nbsp;"+"6.34";
+            }
+            else
+            {
+                result=x;
+               // alert('you are selected Australian Dollar');
+                document.getElementById('pt11').innerHTML="&dollar;"+"&nbsp;"+"11.24";
+                document.getElementById('pt22').innerHTML="&dollar;"+"&nbsp;"+"5.89";
+                document.getElementById('pt33').innerHTML="&dollar;"+"&nbsp;"+"1.52";
+                document.getElementById('pt44').innerHTML="&dollar;"+"&nbsp;"+"6.34";
+
+            }
+
+            window.localStorage.setItem("currency",x);
+
+            //alert(result);
+        }
+</script>
+        <script>
+         function myfun(idv)
+	    {
+	        //alert(idv);
+	        window.localStorage.setItem("item",idv);
+
+	        if(idv == 'pt1')
+	        {
+	            var itemprice = document.getElementById('pt11').innerHTML;
+
+	             window.localStorage.setItem("price",itemprice);
+
+
+	            var name = document.getElementById('p1').innerHTML;
+                window.localStorage.setItem("name",name);
+
+	            //alert(name);
+
+	        }
+            else if(idv == 'pt2')
+	        {
+	            var itemprice = document.getElementById('pt22').innerHTML;
+	            window.localStorage.setItem("price",itemprice);
+
+                var name = document.getElementById('p2').innerHTML;
+                window.localStorage.setItem("name",name);
+	        }
+            else if(idv == 'pt3')
+	        {
+	            var itemprice = document.getElementById('pt33').innerHTML;
+	            window.localStorage.setItem("price",itemprice);
+
+	            var name = document.getElementById('p3').innerHTML;
+                window.localStorage.setItem("name",name);
+	        }
+	        else
+	        {
+	            var itemprice = document.getElementById('pt44').innerHTML;
+	            window.localStorage.setItem("price",itemprice)
+
+	            var name = document.getElementById('p4').innerHTML;
+                window.localStorage.setItem("name",name);
+
+	        }
+
+        }
+        </script>
+
+    </script>
+    <script>
+         var result=window.localStorage.getItem("status");
+         //alert(result);
+    </script>
+</head>
+
+<body onload="load()">
+
+    <div id="container">
+
+        
+
+
+
+        {% if user.is_authenticated %}                     
+
+                  <div class="links" style="display:flex;float:right;margin-right:170px;margin-top:30px;font-family:'Times New Roman', Times, serif;font-size:20px;">
+                         <a  style="color:black;text-decoration:none;" id="link1" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" onclick="document.getElementById('popupno').style.display='none'">Hi, {{user.username}} </a>  |  <a style="color:black;text-decoration:none" id="link2" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'logout' %}" >Log out</a>  |  <a style="color:black;text-decoration:none" id="link3" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'cartdetails' %}" >Cart (<span  id="itemcount"  >0</span>) </a>
+                  </div>                       
+
+         {% else %}                      
+
+                 <div class="links" id="linkid1" style="display:flex;float:right;margin-right:170px;margin-top:30px;font-family:'Times New Roman', Times, serif;font-size:20px;">
+                         <a  style="color:black;text-decoration:none;" id="link1" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" onclick="document.getElementById('popupno').style.display='block'">Login</a>  |  <a style="color:black;text-decoration:none" id="link2" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'register' %}" >Register</a>  |  <a style="color:black;text-decoration:none" id="link3" onmouseover="textdec(this.id)" onmouseout="textrem(this.id)" href="{% url 'cartdetails' %}" >Cart (<span  id="itemcount"  >0</span>) </a>
+                  </div>
+
+        {% endif %}
+
+            
+
+
+<div id="header" style="margin-top:-8px;width:100%;">
+
+
+
+    <input type="text" id="search" placeholder="Search products,Categories,Tags" /><button style="width:33px;height:33px;padding-bottom:10px;background-repeat:no-repeat;border:3px solid black;border-left: none;border-radius:3px;background-image:url({% static 'images/search.png' %})"></button>
+    <div id="logo">
+        <img  src="{% static 'images\logotop.png' %}" alt="" />
+    </div >
+    <a href="https://twitter.com/login?lang=en" id="bottle" ><img  id="tw" style="float:right;margin-right:270px;width:4%;margin-top:-50px;" src="{% static 'images\tw.png' %}" alt="" /></a>
+    <a href="https://www.facebook.com/"><img style="float:right;margin-right:-115px;width:4%;margin-top:-50px;" src="{% static 'images\fb.png' %}" alt="" /></a>
+    <a href="https://in.pinterest.com/"><img style="float:right;margin-right:-175px;width:4%;margin-top:-50px;" src="{% static 'images\pinterest.png' %}" alt="" /></a>
+    <select id="myOption" onchange="run()" style="float:right;margin-top:30px;margin-right:-170px;width:200px;height:32px;border:3px solid black;border-radius:4px;text-align:center" >
+  <option  style="text-align:center" value="volvo">Select your currency</option>
+  <option value="1">INR</option>
+  <option value="2">EUR</option>
+  <option value="3">AUD</option>
+</select>
+
+  <ul style="width:365px">
+  <li><a class="active" href="">Home</a></li>
+  <li><a href="{% url 'shop' %}">Shop</a></li>
+  <li><a href="#">Apparels</a></li>
+  <li><a href="#contact">Contact Us</a></li>
+</ul>
+</div>
+ <div id="slider" style="margin-top:-5px">
+     <img style="width:100%;height:400px" src="{% static 'images\slider6.png' %}" alt="" />
+     <img style="width:100%;height:400px" src="{% static 'images\slide1.jpg' %}" alt="" />
+     <img style="width:100%;height:400px" src="{% static 'images\slide2.jpg' %}" alt="" />
+     <img style="width:100%;height:400px;" src="{% static 'images\slide3.jpg' %}" alt="" />
+     <img style="width:100%;height:400px" src="{% static 'images\slide4.jpg' %}" alt=""/>
+
+
+
+ </div>
+  <div id="about">
+
+    <img src="{% static 'images\info.png' %}" alt="" />
+
+      <p style="text-align: justify;font-family: 'Times New Roman', Times, serif;font-size: 17px">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+       Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+
+
+  </div>
+<hr>
+
+</div>
+<div id="product">
+    <img src="{% static 'images\Prodtitle.png' %}" alt="" />
+
+     <img id="dd" src="{% static 'images\symbol_topic.png' %}" alt="" />
+
+   <br />
+    <br />
+    <div id="content1">
+
+        <a href="" target="_blank"><img class="item4" onclick="myfun(this.id)" id="pt1" style="margin-left:100px;width:15%;" src="{% static 'images\p1.png' %}" alt="" /></a>
+        <a href="" target="_blank"><img class="item3" onclick="myfun(this.id)" id="pt2" style="margin-left:100px;width:15%;" src="{% static 'images\p2.png' %}" alt="" /></a>
+        <a href="" target="_blank"><img class="item1"  onclick="myfun(this.id)" id="pt3"  style="margin-left:100px;width:15%;" src="{% static 'images\p3.png' %}" alt="" /></a>
+        <a href="" target="_blank"><img class="item2"  onclick="myfun(this.id)" id="pt4"  style="margin-left:100px;width:15%;" src="{% static 'images\p4.png' %}" alt="" /></a>
+        <br />
+        <br />
+
+        <span class="item4" id="p1" style="margin-left:120px;font-family:Arial;font-weight:bold;font-size:15px;">Elegant Dark Jocket</span>
+        <span class="item3" id="p2" style="margin-left:170px;font-family:Arial;font-weight:bold;font-size:15px">Wedding Dress Packs</span>
+        <span class="item1" id="p3" style="margin-left:135px;font-family:Arial;font-weight:bold;font-size:15px">Elegant Black Dress</span>
+        <span class="item2" id="p4" style="margin-left:150px;font-family:Arial;font-weight:bold;font-size:15px">Beautiful Goth Dress</span>
+
+
+        <br />
+        <br />
+        <span class="item4" id="pt11" style="margin-left:140px;color:red;font-family:Arial;font-weight:bold;font-size:15px;"><span id="symbol"></span> 955.00</span>
+        <span class="item3" id="pt22"  style="margin-left:275px;color:red;font-family:Arial;font-weight:bold;font-size:15px;">500.00</span>
+        <span class="item1" id="pt33"  style="margin-left:250px;color:red;font-family:Arial;font-weight:bold;font-size:15px;" > 129.90</span>
+        <span class="item2" id="pt44"  style="margin-left:250px;color:red;font-family:Arial;font-weight:bold;font-size:15px;"> 539.00</span>
+
+        <br />
+        <br />
+
+        <button class="add3" onclick="ss(this.id)" id="item4"  style="width:15%;margin-left:95px;padding:6px 6px;font-family:Arial, Helvetica, sans-serif;border:1px solid black;background-color:white;"  >ADD TO CART</button>
+
+        <button class="add2" onclick="ss(this.id)" id="item3"  style="width:15%;margin-left:103px;padding:6px 6px;font-family:Arial, Helvetica, sans-serif;border:1px solid black;background-color:white;" >ADD TO CART</button>
+
+        <button class="add1" onclick="ss(this.id)" id="item1" style="width:15%;margin-left:100px;padding:6px 6px;font-family:Arial, Helvetica, sans-serif;border:1px solid black;background-color:white;" >ADD TO CART</button>
+
+        <button class="add" onclick="ss(this.id)" id="item2" style="width:15%;margin-left:100px;padding:6px 6px;font-family:Arial, Helvetica, sans-serif;border:1px solid black;background-color:white;" >ADD TO CART</button>
+    </div>
+
+
+    <br />
+    <br />
+
+
+
+</div>
+
+    <img style="width:100%;" src="{% static 'images\fashionweek.png' %}" alt="" />
+
+<div style="width:100%;height:400px;">
+
+    <img style="width:70%;height:50%;margin-top:40px;padding:20px 20px;margin-left:200px;" src="{% static 'images\Discount_banner.png' %}" alt="" />
+
+</div>
+
+<div >
+
+     <div id="contact" >
+    <img style="width:100%;margin-bottom:-580px;" src="{% static 'images\footer.png' %}" alt="" />
+
+     <span style="text-align:center;margin-left:300px;font-family:'Baskerville Old Face';font-weight:bold;font-size:60px;color:white;margin-top:0px;">BE FASHY, GET IN TOUCH</span>
+    <br />
+
+    <span style="text-align:center;margin-left:260px;font-family:'Baskerville Old Face';font-weight:bold;font-size:18px;color:white;">IF YOU NEED A QUOTE ABOUT A PRODUCT OR A SERVICE DO NOT HESITATE TO CONTACT US</span>
+
+    <br />
+    <br />
+
+
+        <div style="margin-left:100px;margin-top:10px;width:100%" >
+          <form action="\Uquery" method="post" id="">
+          {% csrf_token %}
+
+         <label style="color:white;font-family:'Times New Roman', Times, serif;font-size:20px;">Your Name </label><label style="color:red;margin-left:5px;font-family:'Times New Roman', Times, serif;font-size:18px">*</label>
+         <br />
+         <input  type="text" style="margin-top:10px;width:30%;height:35px;margin-bottom:10px;background-color:#797778;color:white;border:none;text-align:left;font-family:'Times New Roman', Times, serif;font-size:22px;padding-left:10px" maxlength="20" name="name" required/>
+
+        <label style="color:white;font-family:'Times New Roman', Times, serif;font-size:20px;margin-left:200px;">WOMEN APPARELS, 1000 LONDON </label>
+
+
+         <br />
+
+            <label style="color:white;font-family:'Times New Roman', Times, serif;font-size:20px;">Your Email </label><label style="color:red;margin-left:5px;">*</label>
+
+            <label style="color:white;font-family:'Times New Roman', Times, serif;font-size:20px;margin-left:500px;">Phone:(+216) 12 245 111 </label>
+            <br />
+            <input  type="text" style="margin-top:10px;width:30%;height:35px;background-color:#797778;border:none;margin-bottom:10px;color:white;font-family:'Times New Roman', Times, serif;font-size:18px;padding-left:10px;" name="email" required/>
+            <label style="color:white;font-family:'Times New Roman', Times, serif;font-size:20px;margin-left:200px;margin-bottom:-10px">info@womenmakemen.com </label>
+
+            <br />
+
+             <label style="color:white;font-family:'Times New Roman', Times, serif;font-size:20px;margin-bottom:-30px;">Subject </label>
+
+
+            <br />
+             <input  type="text" style="margin-top:10px;width:30%;height:35px;background-color:#797778;border:none;margin-bottom:10px;padding-left:10px;color:white" name="sub" />
+
+            <br />
+             <label style="color:white;font-family:'Times New Roman', Times, serif;font-size:20px;margin-bottom:10px;">Your Message </label>
+             <br />
+            <textarea  style=" margin-top:10px;width:36%;height:100px;background-color:#797778;border:none;margin-bottom:10px;padding-left:10px;color:white;" name="mess" ></textarea>
+
+            <br />
+            <br />
+
+            <button type="submit"  style="width:11%;height:35px;background-color:#CC4E4F;color:white;border:none;font-family:'Times New Roman', Times, serif;font-size:16px;">SEND</button>
+
+          </form>
+        </div>
+
+
+    </div>
+
+    <div id="add2">
+    </div>
+</div>
+<br/>
+<br/>
+</br>
+</br>
+<div id="column">
+
+    <div id="con1" style="background-color:#FFFFFF">
+        <form action="" method="post" id="">
+        {% csrf_token %}
+     <h4 style="font-family:'Times New Roman', Times, serif;font-size:20px;">Subscribe for the latest Products</h4>
+            <input name="mail" style="width:50%;height:30px;margin-top:30px;border:1px solid black;padding-left:20px;font-family:'Times New Roman', Times, serif;font-size:16px;" type="text" placeholder="Enter your email"  required/>
+    <br />
+    <br/>
+        <span class="popuptext" id="myPopup" style="display: none">A Simple Popup!</span>
+    <button type="submit"  style="width:25%;height:33px;margin-left:50px;background-color:#CC4E4F;color:white;border:none;font-family:'Times New Roman', Times, serif;font-size:20px;text-align:center">Subscribe</button>
+        </form>
+   <br/>
+
+
+    </div>
+
+    <div id="con2" style="">
+
+        </br>
+        <h4 style=" ">Shop</h4>
+        </br>
+        </br>
+        <h4 style="">Apparels</h4>
+        </br>
+        </br>
+        <h4 style="">Sitemap</h4>
+        </br>
+        </br>
+        <h4 style="">Privacy Policy</h4>
+    </div>
+    <div id="con3">
+        <h4>Privacy Policy</h4>
+        </br>
+        </br>
+        <h4 style="margin-top:-15px;">Terms and Conditions</h4>
+        </br>
+        </br>
+        <h4 style="margin-top:-15px;">Discounts</h4>
+
+    </div>
+</div>
+    <div id="footer" style="width:100%;height:50px;margin-top:15px; background-color:black;">
+
+       <p style="text-align:center;color:white;padding-top:15px;font-family:'Times New Roman', Times, serif;font-size:18px;">womenmakemen.com@2018 | All Rights Reserved</p>
+
+    </div>
+	
+    <div id="popupno" class="modal" style="display:none;align:center">
+        <div class="modal-content" style="float:left;width: 35%;margin-top:6%;margin-left: 31%;height: auto;border:none;">
+            <img src="img/close_ico.png" alt="" onclick="document.getElementById('popupno').style.display='none';" style="float:right;margin-top:5px;margin-right:1%;width:12px;height:14px;">
+                <p style="text-align:center;color:white;background-color:#008080;font-weight:bold;letter-spacing:0.01em; font-size:12px;font-face:Open Sans;height:35px;padding-top:12px">LOGIN TO YOUR ACCOUNT</p>
+                </br>
+				{% if form.errors %}
+					<p>There's something wrong with what you entered!</p>
+				{% endif %}
+                </br>
+                <label style="margin-top:30px;margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Don't have an account yet?</label><a style="font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;" href="{% url 'register' %}"> Register now!</a>
+		        <br>
+		        <br>
+		        </br>
+            <form  action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Username/Email *</label><input style="margin-left:15px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="text"  placeholder="Username/Email *" name="username" required></input>
+		        </br>
+		        </br>
+		        <label style="margin-left:15px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Password *</label><input style="margin-left:55px;border:1px solid gray;border-radius:4px;height:35px;padding:8px;" type="password" placeholder="Password *" name="password" required></input>
+		        <br>
+		        <br>
+		        <center>
+			        <button type="submit" style="width:30%;height:43px;border:none;background-color:#F25330;color:white;border-radius:4px;">Log in</button>
+		        </center>
+
+		    </form>
+
+		        <br>
+		        <br>
+			    <a href=""><label class="re1" style="margin-left:45px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your password?</label></a> <a href="#"><label class="re2" style="margin-left:25px;font-weight:bold;letter-spacing:0.01em; font-size:13px;font-face:Open Sans;">Forgot your username?</label></a>
+
+		        <br>
+		        <br>
+	        	<br>
+        </div>
+    </div>
+
+<script>
+(function(){
+        var imgLen = document.getElementById('slider');
+        var images = imgLen.getElementsByTagName('img');
+        var counter = 0;
+
+        if(counter <= images.length){
+            setInterval(function () {
+                if (counter == 0) {
+                    images[0].src = "{% static 'images\slider6.png' %}";
+                }
+                else
+                {
+                    images[0].src = images[counter].src;
+                }
+                console.log(images[counter].src);
+                counter++;
+
+                if(counter === images.length){
+                    counter = 0;
+                }
+            },3000);
+        }
+})();
+
+    (function () {
+        var tw = document.getElementById('tw');
+
+})();
+
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById('popupno');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

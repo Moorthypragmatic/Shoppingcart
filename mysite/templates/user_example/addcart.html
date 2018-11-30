@@ -1,0 +1,459 @@
+﻿<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>Shopping Cart Layout</title>
+  <meta name="author" content="Jake Rocheleau">
+  {% load staticfiles %}
+  <link rel="shortcut icon" href="http://spyrestudios.com/favicon.ico">
+  <link rel="icon" href="http://spyrestudios.com/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="{% static 'CSS/styles.css' %}">
+  <style>
+      #pt{
+          font-size:16px;
+          width:200px;
+          height:60px;
+          text-align:center;
+          float:left;
+      }
+       #pn{
+          font-size:16px;
+          width:200px;
+          height:60px;
+          text-align:center;
+           float:left;
+      }
+       #price{
+          font-size:16px;
+          width:150px;
+          height:60px;
+          text-align:center;
+          margin-left:30px;
+           float:left;
+
+      }
+       #Qty{
+          font-size:16px;
+          width:150px;
+          height:60px;
+          text-align:center;
+          float:left;
+
+      }
+       #ltotal{
+          font-size:16px;
+          width:240px;
+          height:60px;
+          text-align:left;
+          padding-left:80px;
+           float:left;
+
+      }
+       #Remove{
+          font-size:16px;
+          width:260px;
+          height:30px;
+          text-align:left;
+          padding-left:-150px;
+
+      }
+      #productdetails{
+          width:100%;
+          overflow-y:auto;
+          overflow-x:hidden;
+          height:300px;
+      }
+      #cart tbody td {
+  text-align:center;
+  margin-top:4px;
+
+ }
+
+#cart thead th {
+  padding: 40px 0;
+
+
+}
+
+#cart thead th.first {
+  width:250px;
+}
+#cart thead th.second {
+  width: 250px;
+  margin-left:100px;
+
+}
+#cart thead th.third {
+  width: 310px;
+}
+#cart thead th.fourth {
+  width: 200px;
+}
+#cart thead th.fifth {
+  width: 240px;
+}
+#cart thead th.sixth {
+  width: 260px;
+}
+
+tr.productitm {
+  height: 65px;
+  line-height: 65px;
+  border-bottom: 1px solid #d7dbe0;
+
+
+}
+table{
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+
+#cart tbody td img.thumb {
+  vertical-align: bottom;
+  border: 1px solid #ddd;
+  margin-bottom: 4px;
+  width: 75%;
+  padding: 5px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.qtyinput {
+  width: 33px;
+  height: 22px;
+  border: 1px solid #a3b8d3;
+  background: #dae4eb;
+  color: #616161;
+  text-align: center;
+}
+
+tr.totalprice, tr.extracosts {
+  height: 35px;
+  line-height: 35px;
+  width: 100%;
+
+}
+tr.extracosts {
+  background: #e4edf4;
+
+}
+
+.remove {
+  /* http://findicons.com/icon/261449/trash_can?id=397422 */
+  cursor: pointer;
+  position: relative;
+  right: 12px;
+  top: 5px;
+  width:100%;
+}
+
+
+.light {
+  color: #888b8d;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.45);
+  font-size: 1.1em;
+  font-weight: normal;
+
+
+}
+.thick {
+  color: #272727;
+  font-size: 1.7em;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+  </style>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script>
+        var fadeTime = 300;
+        /*function onload()
+        {
+            var currencylist=window.localStorage.getItem("currency");
+            alert(currencylist);
+
+            var tax=35;
+
+            var dataval = window.localStorage.getItem("carttable");
+            document.getElementById("productdetails").innerHTML = dataval;
+
+            var price= document.getElementsByClassName("linetotal");
+
+            //alert(price);
+
+            var total=''+window.localStorage.getItem("itemprice");
+
+            var retotal=35;
+
+            document.getElementById("finaltotal").innerHTML = "$" + parseFloat(total).toFixed(2);
+
+            window.localStorage.setItem("retotal",window.localStorage.getItem("itemprice"));
+
+            //second method
+
+
+
+
+        }
+        function myfun(productrow,elemid)
+        {
+
+            var elem = document.getElementById("prodec");
+            elem.remove();
+
+            var linetotal=elemid.innerHTML;
+            var val1 = linetotal.split("$")[1];
+
+            //alert(parseFloat(val1));
+
+            var retotal = parseFloat((document.getElementById("finaltotal").innerHTML + "").split("$")[1]+"");
+
+            retotal=retotal-parseFloat(val1);
+
+
+            document.getElementById("finaltotal").innerHTML = "$" + parseFloat(retotal).toFixed(2);
+
+            window.localStorage.setItem("retotal",retotal);
+
+        }
+        function qtytotal(elem,elemid,priceval)
+        {
+            alert(priceval);
+            var qty=elem.value;
+            var totval = qty * priceval;
+
+			elemid.innerHTML = '$' + parseFloat(totval).toFixed(2);
+
+			var linetotal=elemid.innerHTML;
+            var val1 = linetotal.split("$")[1];
+            var totalid = "totval";
+            var val = (document.getElementById(totalid).innerHTML + "").split("$")[1];
+            alert(val);
+            //var row=document.getElementById('prodec').rows.length;
+            var retotal1=35;
+
+            for(int i=0;i<row;i++)
+            {
+                var totalid = "totval" + i;
+                var val = (document.getElementById(totalid).innerHTML + "").split("$")[1];
+                var fval = parseFloat(val);
+
+                retotal1+=fval;
+
+            }
+
+
+           var retotal = parseFloat((document.getElementById("finaltotal").innerHTML + "").split("$")[1]+"");
+
+			var linetotal=elemid.innerHTML;
+			var val1 = linetotal.split("$")[1];
+
+			//alert(val1);
+
+            var ft=retotal+parseFloat(qty*priceval);
+			document.getElementById("finaltotal").innerHTML = "$" + parseFloat(ft).toFixed(2);
+
+        }*/
+        function onload() {
+
+            var dataval = window.localStorage.getItem("carttable");
+
+            document.getElementById("cart").tBodies[0].innerHTML = dataval;
+
+            var row = document.getElementById("cart").rows.length;
+
+			//alert(row);
+
+            var total=35;
+
+           //var val = (document.getElementById("totval1").innerHTML + "").split("$")[1];
+            //alert(val);
+
+           for(var i=1;i<row;i++)
+           {
+                var totalid = "totval" + i;
+                var val = document.getElementById(totalid).innerHTML;
+                var fval = parseFloat(val);
+                total +=fval;
+
+            }
+            //alert(total);
+            document.getElementById("finaltotal").innerHTML =  parseFloat(total).toFixed(2);
+            var sss=parseFloat(total).toFixed(2);
+            window.localStorage.setItem("retotal",sss);
+        }
+        function qtytotal(elem,totalelemid,priceval)
+        {
+            try
+            {
+
+				 var row = document.getElementById("cart").rows.length;
+
+				 //alert(row);
+
+                var qty=elem.value;
+
+                var totval = qty * priceval;
+
+                //alert(priceval);
+
+                totalelemid.innerHTML =  parseFloat(totval).toFixed(2);
+
+                var retotal=35;
+
+                for(var i=1;i<row;i++)
+                {
+                    var totalid = "totval" + i;
+                    var val = document.getElementById(totalid).innerHTML;
+                    var fval = parseFloat(val);
+
+                    retotal+=fval;
+                }
+                document.getElementById("finaltotal").innerHTML =  parseFloat(retotal).toFixed(2);
+                var sss=parseFloat(retotal).toFixed(2);
+                window.localStorage.setItem("retotal",sss);
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+        function remove(elem,rowid)
+        {
+
+            var row = document.getElementById("cart").rows.length;
+
+			var indexRow = elem.parentNode.parentNode.rowIndex;
+			//alert(indexRow);
+
+			document.getElementById("cart").deleteRow(indexRow);
+
+			var totalid = "totval" + indexRow;
+
+			var fval = document.getElementById(totalid).innerHTML;
+
+            //alert(fval);
+
+            var retotal = parseFloat((document.getElementById("finaltotal").innerHTML));
+            retotal = retotal - fval;
+            document.getElementById("finaltotal").innerHTML = parseFloat(retotal+"").toFixed(2);
+
+
+
+            var rowslwn = document.getElementById("cart").rows.length;
+
+            var updateresults=0;
+
+            var sss=parseFloat(retotal).toFixed(2);
+            window.localStorage.setItem("retotal",sss);
+
+
+/*
+            if(rowslwn==4)
+            {
+                for(var x=1;x<rowslwn;x++)
+                {
+                    document.getElementById("cart").deleteRow(x);
+
+                     var row = document.getElementById("cart").rows.length;
+
+                    for(var i=1;i<row-3;i++)
+                    {
+                        var totalid = "totval" + i;
+                        var val = (document.getElementById(totalid).innerHTML + "").split("$")[1];
+                        var fval = parseFloat(val);
+                        updateresults+=fval;
+                    }
+                }
+
+            }
+            */
+        }
+
+    function payment()
+    {
+
+    }
+    </script>
+    <script>
+var handler = StripeCheckout.configure({
+  key: 'pk_test_uKUYHVG6Rd9pYEehPCEW1l4E',
+  //image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  locale: 'auto',
+  token: function(token) {
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+      alert('Success')
+      localStorage.clear();
+      window.location.href="/";
+  }
+});
+
+document.getElementById('customButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'Stripe.com',
+    description: '2 widgets',
+    zipCode: true,
+    amount: 2000
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  handler.close();
+});
+</script>
+</head>
+
+<body onload="onload()">
+  <div id="w">
+    <header id="title">
+      <h1> Shopping Cart </h1>
+    </header>
+    <div id="page" >
+        <div id="header">
+            <div><span id="pt">Product Image</span></div>
+            <div><span id="pn">Product Name</span></div>
+            <div><span id="Qty">Quantity</span></div>
+            <div><span id="price">Price</span></div>
+            <div><span id="ltotal">Total</span></div>
+            <div><span id="Remove">Remove</span></div>
+        </div>
+        <table id="cart">
+        <thead>
+            <tr class="rows" >
+            <th class="first"></th>
+            <th class="second"></th>
+            <th class="third"></th>
+            <th class="fourth"></th>
+            <th class="fifth"></th>
+            <th class="sixth"></th>
+          </tr>
+        </thead>
+
+        <tbody >
+          <!-- shopping cart contents -->
+
+        </tbody>
+      </table>
+        <div class="extracosts"><div class="light" style="margin-left:550px;font-size:13px">Shipping &amp;Tax</div></div>
+        <div  class="light"></div><div id="taxamt"style="margin-left:810px;font-size:13px">$35.00</div><div>&nbsp;</div>
+        <div class="totalprice"></div><div class="thick" id="addtotal" style="color:red;margin-left:790px;font-size:13px" >Total:</div>
+        <div >&nbsp;</div><div><span id="finaltotal" style="color:red;margin-left:790px;font-size:13px" class="thick" >0.0</span></div>
+        <div class="checkoutrow"><center><div class="checkout"><a href="{% url 'checkout' %}" target="_blank"><button  id="submitbtn">Checkout Now!</button></a></div></center></div>
+    </div>
+  </div>
+</body>
+<script>
+
+
+</script>
+</html>
