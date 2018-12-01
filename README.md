@@ -13,3 +13,7 @@ strip account is used to check out process
 Shop page
 
 [![shop-page.png](https://i.postimg.cc/HkLz1h1g/shop-page.png)](https://postimg.cc/N5Wm1b0J)
+
+Product details
+
+[![product-details.png](https://i.postimg.cc/fLQYyHpk/product-details.png)](https://postimg.cc/2qT1Xxzf)
